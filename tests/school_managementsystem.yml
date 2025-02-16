@@ -1,0 +1,180 @@
+User:
+  table_name: users
+  attributes:
+    user_id: { type: int, primary_key: true }
+    username: { type: string, unique: true }
+    password_hash: { type: string }
+    email: { type: string, unique: true }
+    role_id: { type: int, foreign_key: roles.role_id }
+
+Role:
+  table_name: roles
+  attributes:
+    role_id: { type: int, primary_key: true }
+    role_name: { type: string, unique: true }
+
+Permission:
+  table_name: permissions
+  attributes:
+    permission_id: { type: int, primary_key: true }
+    permission_name: { type: string, unique: true }
+
+# 2. Institution Management
+Institution:
+  table_name: institutions
+  attributes:
+    institution_id: { type: int, primary_key: true }
+    name: { type: string }
+    address: { type: string }
+    contact_info: { type: string }
+
+Department:
+  table_name: departments
+  attributes:
+    department_id: { type: int, primary_key: true }
+    department_name: { type: string }
+    institution_id: { type: int, foreign_key: institutions.institution_id }
+
+# 3. Academic Management
+Student:
+  table_name: students
+  attributes:
+    student_id: { type: int, primary_key: true }
+    user_id: { type: int, foreign_key: users.user_id }
+    parent_id: { type: int, foreign_key: users.user_id }
+
+Teacher:
+  table_name: teachers
+  attributes:
+    teacher_id: { type: int, primary_key: true }
+    user_id: { type: int, foreign_key: users.user_id }
+    department_id: { type: int, foreign_key: departments.department_id }
+
+Class:
+  table_name: classes
+  attributes:
+    class_id: { type: int, primary_key: true }
+    class_name: { type: string }
+    teacher_id: { type: int, foreign_key: teachers.teacher_id }
+    subject_id: { type: int, foreign_key: subjects.subject_id }
+
+Subject:
+  table_name: subjects
+  attributes:
+    subject_id: { type: int, primary_key: true }
+    subject_name: { type: string }
+    department_id: { type: int, foreign_key: departments.department_id }
+
+Enrollment:
+  table_name: enrollments
+  attributes:
+    enrollment_id: { type: int, primary_key: true }
+    student_id: { type: int, foreign_key: students.student_id }
+    class_id: { type: int, foreign_key: classes.class_id }
+
+# 4. Attendance and Grading
+Attendance:
+  table_name: attendances
+  attributes:
+    attendance_id: { type: int, primary_key: true }
+    student_id: { type: int, foreign_key: students.student_id }
+    class_id: { type: int, foreign_key: classes.class_id }
+    date: { type: date }
+    status: { type: string, enum: [Present, Absent] }
+
+Grade:
+  table_name: grades
+  attributes:
+    grade_id: { type: int, primary_key: true }
+    student_id: { type: int, foreign_key: students.student_id }
+    class_id: { type: int, foreign_key: classes.class_id }
+    grade_value: { type: float }
+    remarks: { type: string }
+
+# 5. Finance and Accounts
+FeeStructure:
+  table_name: fee_structures
+  attributes:
+    fee_structure_id: { type: int, primary_key: true }
+    class_id: { type: int, foreign_key: classes.class_id }
+    amount: { type: float }
+    due_date: { type: date }
+
+Payment:
+  table_name: payments
+  attributes:
+    payment_id: { type: int, primary_key: true }
+    student_id: { type: int, foreign_key: students.student_id }
+    amount: { type: float }
+    payment_date: { type: date }
+    invoice_id: { type: int, foreign_key: invoices.invoice_id }
+
+Invoice:
+  table_name: invoices
+  attributes:
+    invoice_id: { type: int, primary_key: true }
+    student_id: { type: int, foreign_key: students.student_id }
+    amount: { type: float }
+    due_date: { type: date }
+    status: { type: string, enum: [Paid, Unpaid] }
+
+# 6. Procurement and Inventory
+Inventory:
+  table_name: inventory
+  attributes:
+    inventory_id: { type: int, primary_key: true }
+    item_name: { type: string }
+    quantity: { type: int }
+    reorder_level: { type: int }
+
+PurchaseOrder:
+  table_name: purchase_orders
+  attributes:
+    order_id: { type: int, primary_key: true }
+    vendor_id: { type: int, foreign_key: vendors.vendor_id }
+    item_id: { type: int, foreign_key: inventory.inventory_id }
+    order_date: { type: date }
+    status: { type: string, enum: [Pending, Completed] }
+
+Vendor:
+  table_name: vendors
+  attributes:
+    vendor_id: { type: int, primary_key: true }
+    vendor_name: { type: string }
+    contact_info: { type: string }
+
+# 7. Communication
+Message:
+  table_name: messages
+  attributes:
+    message_id: { type: int, primary_key: true }
+    sender_id: { type: int, foreign_key: users.user_id }
+    receiver_id: { type: int, foreign_key: users.user_id }
+    content: { type: string }
+    timestamp: { type: datetime }
+
+Announcement:
+  table_name: announcements
+  attributes:
+    announcement_id: { type: int, primary_key: true }
+    title: { type: string }
+    content: { type: string }
+    date: { type: date }
+
+# 8. Audit and Logs
+AuditLog:
+  table_name: audit_logs
+  attributes:
+    log_id: { type: int, primary_key: true }
+    user_id: { type: int, foreign_key: users.user_id }
+    action: { type: string, enum: [Create, Update, Delete] }
+    timestamp: { type: datetime }
+    details: { type: string }
+
+Report:
+  table_name: reports
+  attributes:
+    report_id: { type: int, primary_key: true }
+    report_name: { type: string }
+    generated_by: { type: int, foreign_key: users.user_id }
+    timestamp: { type: datetime }

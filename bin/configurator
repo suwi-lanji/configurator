@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+# Ensure the lib directory is in the load path
+$:.unshift File.expand_path('../lib', __dir__)
+
+require 'configurator/cli'
+
+Configurator::CLI.start(ARGV)
