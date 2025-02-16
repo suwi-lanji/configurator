@@ -4,7 +4,7 @@ Dir.chdir(File.expand_path(__dir__)) do
 end
 
 Gem::Specification.new do |spec|
-  spec.name          = 'configurator'
+  spec.name          = 'config-to-laravel-migrations'
   spec.version       = Configurator::VERSION
   spec.authors       = ['Suwilanji Jack Chipofya']
   spec.email         = ['suwilanji@inongo.space']

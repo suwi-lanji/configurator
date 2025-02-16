@@ -32,7 +32,7 @@ If Ruby is not installed, follow the official [Ruby installation guide](https://
 You can install the `configurator` gem directly from the source:
 
 ```bash
-gem install configurator
+gem install config-to-laravel-migrations
 ```
 
 Alternatively, clone the repository and build the gem locally:
