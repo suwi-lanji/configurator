@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'config-to-laravel-migrations'
   spec.version       = Configurator::VERSION
   spec.authors       = ['Suwilanji Jack Chipofya']
-  spec.email         = ['suwilanji@inongo.space']
+  spec.email         = ['suwilanjichipofya@outlook.com']
   spec.summary       = 'Generate Laravel migrations from YAML or JSON config files.'
   spec.description   = 'A command-line tool to generate Laravel Eloquent migrations from YAML or JSON configuration files.'
   spec.homepage      = 'https://github.com/suwi-lanji/configurator'

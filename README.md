@@ -1,6 +1,6 @@
 # Configurator
 
-### Available for hire email | suwilanji@inongo.space. Linked In Suwilanji Chipofya
+### Available for hire email | suwilanjichipofya@outlook.com . Linked In Suwilanji Chipofya
 
 **Configurator** is a command-line tool that generates Laravel Eloquent migrations from YAML or JSON configuration files. It simplifies the process of defining database schemas and automates the creation of migration files for Laravel applications.
 
