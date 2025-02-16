@@ -223,7 +223,7 @@ If you encounter any issues or have questions, please open an issue on the [GitH
 
 - **Suwilanji Jack Chipofya**  
   GitHub: [suwi-lanji](https://github.com/suwi-lanji)  
-  Email: suwilanji@inongo.space
+  Email: suwilanjichipofya@outlook.com
 
 ---
 
